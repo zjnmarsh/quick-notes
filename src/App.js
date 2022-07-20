@@ -5,25 +5,28 @@ import '@fontsource/roboto/300.css'
 import {Box, Button, Grid, TextField, Typography} from "@mui/material";
 import NoteCard from './NoteCard'
 
+import { initializeApp } from "firebase/app";
+import { getFirestore } from "firebase/firestore";
+import { collection, doc, addDoc, getDoc, onSnapshot, query, where, getDocs, limit } from "firebase/firestore"
+
 
 const App = () => {
+
+    const [notes, setNotes] = useState([]);
+    const [newNote, setNewNote] = useState("");
+
+    const addNewNote = () => {
+        setNotes(notes.concat([{text: newNote, date:"", key: Date.now()}]));
+        setNewNote("");
+    }
 
     const deleteNote = (key) => {
         console.log(key);
         let noteIndex = notes.findIndex(note => note.key === key);
         let newArr1 = notes.slice(0, noteIndex);
         let newArr2 = notes.slice(noteIndex+1, notes.length);
-        newArr1.concat(newArr2);
+        newArr1 = newArr1.concat(newArr2);
         setNotes(newArr1);
-    }
-
-    // const [notes, setNotes] = useState([{text: "This is the first note", date: "", key: 0}, {text: "This is a second note", date: "", key: 1}, {text: "This is a third note", date: "", key: 2}])
-    const [notes, setNotes] = useState([]);
-    const [newNote, setNewNote] = useState("");
-
-    const addNewNote = () => {
-        setNotes(notes.concat([{text: newNote, date:"", key: Date()}]));
-        setNewNote("");
     }
 
     return (<div className="App">
