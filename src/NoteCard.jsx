@@ -35,7 +35,7 @@ const NoteCard = ({data, deletefunc}) => {
                     <CardContent>
                         <Typography variant={"body1"}>
                             {data.text}
-                            {data.key}
+                            {/*{data.key}*/}
                         </Typography>
                     </CardContent>
                 </CardActionArea>
