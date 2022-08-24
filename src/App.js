@@ -23,6 +23,7 @@ import {
   signInWithRedirect,
   signInWithPopup,
   GoogleAuthProvider,
+  signOut,
 } from "firebase/auth";
 
 const App = () => {
@@ -45,9 +46,9 @@ const App = () => {
   const user = auth.currentUser;
   const [authFlag, setAuthFlag] = useState(false);
 
-  const authenticateWithGoogle = () => {
+  const signInGoogle = () => {
     console.log("Authenticating with Google");
-    signInWithPopup(auth, provider)
+    signInWithRedirect(auth, provider)
       .then((result) => {
         // google access token
         const credential = GoogleAuthProvider.credentialFromResult(result);
@@ -61,6 +62,19 @@ const App = () => {
       })
       .catch((error) => {
         console.error("There was an error" + error);
+      });
+  };
+
+  const signOutGoogle = () => {
+    console.log("Signing out with Google");
+    signOut(auth)
+      .then(() => {
+        console.log("Sign out successful");
+        setAuthFlag(false);
+        setFSNotes([]);
+      })
+      .catch((error) => {
+        console.log("Error " + error);
       });
   };
 
@@ -118,15 +132,35 @@ const App = () => {
 
   useEffect(() => {
     console.log("use effect");
-    // authenticateWithGoogle();
+    // signInGoogle();
     fsListenToData();
   }, [userId]);
 
   return user === null ? (
-    <div>
-      <Button variant={"contained"} onClick={() => authenticateWithGoogle()}>
-        Sign In With Google
-      </Button>
+    <div className="App">
+      <Box>
+        <Box className={"Navbar"}>
+          {/* <Box width={"82%"}> */}
+          <Typography variant={"h2"} component={"div"} gutterBottom>
+            Quick notes
+          </Typography>
+          {/* </Box> */}
+        </Box>
+      </Box>
+
+      <Box
+        display={"flex"}
+        // justifyContent={"center"}
+        // alignItems={"center"}
+        height={"100%"}
+        paddingTop={"5rem"}
+        paddingBottom={"5rem"}
+      >
+        <Button variant={"contained"} onClick={() => signInGoogle()}>
+          Sign In With Google
+        </Button>
+      </Box>
+
       {/*<div>{userId}</div>*/}
       {/*<div>Hello</div>*/}
     </div>
@@ -140,7 +174,7 @@ const App = () => {
             </Typography>
           </Box>
           <Box position={"fixed"} right={0}>
-            <MenuBar />
+            <MenuBar signOut={signOutGoogle} />
           </Box>
         </Box>
 

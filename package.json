@@ -1,6 +1,14 @@
 {
-  "name": "movie-search",
+  "name": "quick-notes",
   "version": "0.1.0",
+  "keywords": [
+    "react",
+    "create-react-app",
+    "template",
+    "pwa",
+    "workbox",
+    "service-worker"
+  ],
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.9.3",
@@ -20,7 +28,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "start-https": "HTTPS=true SSL_CRT_FILE='/Users/zebedeemarsh/Documents/Coding/webdev/0webcert/192.168.0.10+1.pem' SSL_KEY_FILE='/Users/zebedeemarsh/Documents/Coding/webdev/0webcert/192.168.0.10+1-key.pem' npm start"
   },
   "eslintConfig": {
     "extends": [
