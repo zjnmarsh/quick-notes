@@ -179,11 +179,11 @@ const App = () => {
         </Box>
 
         <Grid container spacing={2} className={"NoteList"}>
-          <NoteCard
+          {/* <NoteCard
             data={{ text: user.uid }}
             key={0}
             deletefunc={fsDeleteData}
-          />
+          /> */}
           {fsNotes.map((note) => (
             <NoteCard data={note} key={note.key} deletefunc={fsDeleteData} />
           ))}
